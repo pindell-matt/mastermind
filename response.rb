@@ -21,4 +21,12 @@ module Response
     puts "Do you want to (p)lay again or (q)uit?"
   end
 
+  def self.bad_input
+    puts "Sorry, I don't understand - please try again."
+  end
+
+  def self.win
+    print "Congratulations! You guessed the sequence "
+  end
+
 end
