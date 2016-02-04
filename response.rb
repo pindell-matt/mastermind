@@ -1,5 +1,4 @@
 module Response
-  # alt HASH or CONSTANT
 
   def self.welcome
     puts "Welcome to MASTERMIND\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"

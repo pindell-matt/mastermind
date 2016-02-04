@@ -36,6 +36,11 @@ class Mastermind
     end.join
   end
 
+  def answer_gen
+    @four = ['R','G','B','Y']
+    @four.sample
+  end
+
   def process_input(input)
     if input == 'p' || input == 'play'
       @start = Time.now
@@ -50,6 +55,7 @@ class Mastermind
   end
 
   def game_flow
+    # recursion
     Response.start
     @guess_count = 0
     loop do
@@ -74,6 +80,32 @@ class Mastermind
     Response.replay
   end
 
+  def guess_feedback(guess)
+    elements = guess_elements_check(guess)
+    position = guess_position_check(guess)
+    puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
+  end
+
+  def guess_position_check(guess)
+    position = 0 # position is ivar?
+    guess.chars.each_with_index do |guess, index|
+      if guess == @answer[index]
+        position += 1
+      end
+    end
+    position
+  end
+
+  def guess_elements_check(guess)
+    element = 0
+    guess.chars.each do |char|
+      if @answer.include?(char)
+        element += 1
+      end
+    end
+    element
+  end
+
   def win_stats(guess)
     Response.win(guess.upcase)
     puts (total_guesses + ' ' + elapsed_time(@start, Time.now))
@@ -87,17 +119,6 @@ class Mastermind
   def elapsed_time(start, finish)
     raw_time = (finish - start).divmod(60)
     "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
-  end
-
-  def guess_feedback(guess)
-    position = 0
-    @answer.chars.each_with_index do |e, index|
-      if e == guess[index]
-        position += 1
-      end
-    end
-    elements = 1
-    puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
   end
 
 end
