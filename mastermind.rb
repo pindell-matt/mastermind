@@ -51,37 +51,70 @@ class Mastermind
     end
   end
 
+  # def game_flow
+  #   # recursion - call game_flow again at end of each section - except for success
+  #   Response.start
+  #   @guess_count = 0
+  #   loop do
+  #     guess = user_input.downcase
+  #     if guess == @answer.downcase
+  #       @guess_count += 1
+  #       win_stats(guess)
+  #       break
+  #     elsif guess == 'c' || guess == 'cheat'
+  #       puts "#{@answer}"
+  #     elsif guess.length > 4
+  #       puts "Sequence too long!"
+  #     elsif guess.length < 4
+  #       puts "Sequence too short!"
+  #     elsif guess == 'q' || guess == 'quit'
+  #       abort("Thanks for playing!")
+  #     else
+  #       @guess_count += 1
+  #       guess_feedback(guess.upcase)
+  #     end
+  #   end
+  #   Response.replay
+  # end
+
   def game_flow
     # recursion - call game_flow again at end of each section - except for success
     Response.start
     @guess_count = 0
     loop do
       guess = user_input.downcase
-      if guess == @answer.downcase
+      case guess
+      when @answer.downcase
         @guess_count += 1
         win_stats(guess)
         break
-      elsif guess == 'c' || guess == 'cheat'
+      when 'c' || 'cheat'
         puts "#{@answer}"
-      elsif guess.length > 4
-        puts "Sequence too long!"
-      elsif guess.length < 4
-        puts "Sequence too short!"
-      elsif guess == 'q' || guess == 'quit'
-        abort("Thanks for playing!")
+      when 'q' || 'quit'
+        abort(Response.quit)
       else
-        @guess_count += 1
+        check_length(guess)
         guess_feedback(guess.upcase)
       end
     end
     Response.replay
   end
 
+  def check_length(guess)
+    @guess_count += 1
+    if guess.length > 4
+      Response.too_long
+    elsif guess.length < 4
+      Response.too_short
+    end
+  end
+
   def guess_feedback(guess)
     elements = guess_elements_check(guess)
     position = guess_position_check(guess)
     puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
-    puts "You've taken #{@guess_count} guess"
+    # correct plural
+    puts "You've taken #{@guess_count} guesses"
   end
 
   def guess_position_check(guess)

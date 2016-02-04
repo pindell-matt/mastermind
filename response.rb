@@ -32,4 +32,12 @@ module Response
     "Thanks for playing!"
   end
 
+  def self.too_long
+    puts "Sequence too long!"
+  end
+
+  def self.too_short
+    puts "Sequence too short!"
+  end
+
 end
