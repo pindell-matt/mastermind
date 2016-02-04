@@ -74,8 +74,8 @@ class Mastermind
       elsif guess == 'q' || guess == 'quit'
         abort("Thanks for playing!")
       else
-        guess_feedback(guess.upcase)
         @guess_count += 1
+        guess_feedback(guess.upcase)
       end
     end
     Response.replay
@@ -85,6 +85,7 @@ class Mastermind
     elements = guess_elements_check(guess)
     position = guess_position_check(guess)
     puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
+    puts "You've taken #{@guess_count} guess"
   end
 
   def guess_position_check(guess)
