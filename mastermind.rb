@@ -49,7 +49,6 @@ class Mastermind
     end
   end
 
-
   def game_flow
     Response.start
     @guess_count = 0
@@ -68,8 +67,8 @@ class Mastermind
       elsif guess == 'q' || guess == 'quit'
         abort("Thanks for playing!")
       else
+        guess_feedback(guess.upcase)
         @guess_count += 1
-        puts "Try again..."
       end
     end
     Response.replay
@@ -90,8 +89,15 @@ class Mastermind
     "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
   end
 
-  def compare_input_to_sequence
-
+  def guess_feedback(guess)
+    position = 0
+    @answer.chars.each_with_index do |e, index|
+      if e == guess[index]
+        position += 1
+      end
+    end
+    elements = 1
+    puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
   end
 
 end
