@@ -14,7 +14,6 @@ class Mastermind
            }
 
   def initialize
-    @answer = gen_answer
     Response.welcome
     loop do
       game_start(user_input.downcase)
@@ -27,6 +26,17 @@ class Mastermind
   end
 
   def game_start(input)
+    @answer = gen_answer
+    process_input(input)
+  end
+
+  def gen_answer
+    4.times.map do
+      COLORS[rand(1..4)]
+    end.join
+  end
+
+  def process_input(input)
     if input == 'p' || input == 'play'
       @start = Time.now
       game_flow
@@ -39,6 +49,7 @@ class Mastermind
     end
   end
 
+
   def game_flow
     Response.start
     @guess_count = 0
@@ -50,6 +61,10 @@ class Mastermind
         break
       elsif guess == 'c' || guess == 'cheat'
         puts "#{@answer}"
+      elsif guess.length > 4
+        puts "Sequence too long!"
+      elsif guess.length < 4
+        puts "Sequence too short!"
       elsif guess == 'q' || guess == 'quit'
         abort("Thanks for playing!")
       else
@@ -58,14 +73,6 @@ class Mastermind
       end
     end
     Response.replay
-  end
-
-  def gen_answer
-    final = []
-    4.times do
-      final << COLORS[rand(1..4)]
-    end
-    final.join
   end
 
   def win_stats(guess)
@@ -81,6 +88,10 @@ class Mastermind
   def elapsed_time(start, finish)
     raw_time = (finish - start).divmod(60)
     "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
+  end
+
+  def compare_input_to_sequence
+
   end
 
 end
