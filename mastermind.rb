@@ -7,12 +7,6 @@ class Mastermind
 
   attr_reader :start_time
 
-  COLORS = { 1 => 'R',
-             2 => 'G',
-             3 => 'B',
-             4 => 'Y'
-           }
-
   def initialize
     Response.welcome
     loop do
@@ -31,16 +25,17 @@ class Mastermind
   end
 
   def gen_answer
-    4.times.map do
-      COLORS[rand(1..4)]
+    colors = %w{R G B Y}
+    4.times.map do |color|
+      colors.sample
     end.join
   end
 
-  def answer_gen
-    binding.pry
-    @four = ['R','G','B','Y']
-    @four.sample
-  end
+  # def answer_gen(num, colors)
+  #   num.times.map do |color|
+  #     colors.sample
+  #   end.join
+  # end
 
   def process_input(input)
     if input == 'p' || input == 'play'
