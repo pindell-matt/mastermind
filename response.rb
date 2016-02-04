@@ -25,8 +25,8 @@ module Response
     puts "Sorry, I don't understand - please try again."
   end
 
-  def self.win
-    print "Congratulations! You guessed the sequence "
+  def self.win(sequence)
+    print "Congratulations! You guessed the sequence '#{sequence}' "
   end
 
 end
