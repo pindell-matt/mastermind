@@ -17,7 +17,7 @@ class Mastermind
     @answer = gen_answer
     Response.welcome
     loop do
-      eval_start_input(user_input.downcase)
+      game_start(user_input.downcase)
     end
   end
 
@@ -26,7 +26,7 @@ class Mastermind
     gets.chomp
   end
 
-  def eval_start_input(input)
+  def game_start(input)
     if input == 'p' || input == 'play'
       @start = Time.now
       game_flow
@@ -70,18 +70,17 @@ class Mastermind
 
   def win_stats(guess)
     Response.win(guess.upcase)
-    total_guesses
-    elapsed_time(@start, Time.now)
+    puts (total_guesses + ' ' + elapsed_time(@start, Time.now))
   end
 
   def total_guesses
     plural = @guess_count > 1 ? "guesses" : "guess"
-    print "in #{@guess_count} #{plural} over "
+    "in #{@guess_count} #{plural} over"
   end
 
   def elapsed_time(start, finish)
     raw_time = (finish - start).divmod(60)
-    puts "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
+    "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
   end
 
 end
