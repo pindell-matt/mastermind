@@ -104,7 +104,7 @@ class Mastermind
     guess.chars.each do |char|
       if answer_chars.include?(char)
         element += 1
-        answer_chars.pop
+        answer_chars.delete_at(answer_chars.index(char))
       end
     end
     element
