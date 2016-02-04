@@ -37,6 +37,7 @@ class Mastermind
   end
 
   def answer_gen
+    binding.pry
     @four = ['R','G','B','Y']
     @four.sample
   end
@@ -97,10 +98,12 @@ class Mastermind
   end
 
   def guess_elements_check(guess)
+    answer_chars = @answer.chars
     element = 0
     guess.chars.each do |char|
-      if @answer.include?(char)
+      if answer_chars.include?(char)
         element += 1
+        answer_chars.pop
       end
     end
     element
