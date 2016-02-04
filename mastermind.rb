@@ -38,12 +38,13 @@ class Mastermind
   # end
 
   def process_input(input)
-    if input == 'p' || input == 'play'
+    case input
+    when 'p' || 'play'
       @start = Time.now
       game_flow
-    elsif input == 'i' || input == 'instructions'
+    when 'i' || 'instructions'
       Response.instructions
-    elsif input == 'q' || input == 'quit'
+    when 'q' || 'quit'
       abort("Thanks for playing!")
     else
       Response.bad_input
@@ -51,7 +52,7 @@ class Mastermind
   end
 
   def game_flow
-    # recursion
+    # recursion - call game_flow again at end of each section - except for success
     Response.start
     @guess_count = 0
     loop do
