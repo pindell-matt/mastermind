@@ -28,4 +28,8 @@ module Response
     print "Congratulations! You guessed the sequence '#{sequence}' "
   end
 
+  def self.quit
+    "Thanks for playing!"
+  end
+
 end

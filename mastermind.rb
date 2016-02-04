@@ -45,7 +45,7 @@ class Mastermind
     when 'i' || 'instructions'
       Response.instructions
     when 'q' || 'quit'
-      abort("Thanks for playing!")
+      abort(Response.quit)
     else
       Response.bad_input
     end
