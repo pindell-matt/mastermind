@@ -21,6 +21,8 @@ class Mastermind
 
   def game_start(input)
     @answer = gen_answer
+    @start = Time.now
+    @guess_count = 0
     process_input(input)
   end
 
@@ -40,7 +42,6 @@ class Mastermind
   def process_input(input)
     case input
     when 'p' || 'play'
-      @start = Time.now
       game_flow
     when 'i' || 'instructions'
       Response.instructions
@@ -78,9 +79,7 @@ class Mastermind
   # end
 
   def game_flow
-    # recursion - call game_flow again at end of each section - except for success
     Response.start
-    @guess_count = 0
     loop do
       guess = user_input.downcase
       case guess
@@ -94,6 +93,7 @@ class Mastermind
         abort(Response.quit)
       else
         check_length(guess)
+        # needs to not run feedback if length returns value / recursion stragety
         guess_feedback(guess.upcase)
       end
     end
