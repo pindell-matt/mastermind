@@ -52,53 +52,53 @@ class Mastermind
     end
   end
 
-  # def game_flow
-  #   # recursion - call game_flow again at end of each section - except for success
-  #   Response.start
-  #   @guess_count = 0
-  #   loop do
-  #     guess = user_input.downcase
-  #     if guess == @answer.downcase
-  #       @guess_count += 1
-  #       win_stats(guess)
-  #       break
-  #     elsif guess == 'c' || guess == 'cheat'
-  #       puts "#{@answer}"
-  #     elsif guess.length > 4
-  #       puts "Sequence too long!"
-  #     elsif guess.length < 4
-  #       puts "Sequence too short!"
-  #     elsif guess == 'q' || guess == 'quit'
-  #       abort("Thanks for playing!")
-  #     else
-  #       @guess_count += 1
-  #       guess_feedback(guess.upcase)
-  #     end
-  #   end
-  #   Response.replay
-  # end
-
   def game_flow
+    # recursion - call game_flow again at end of each section - except for success
     Response.start
+    @guess_count = 0
     loop do
       guess = user_input.downcase
-      # binding.pry
-      case guess
-      when @answer.downcase
+      if guess == @answer.downcase
         @guess_count += 1
         win_stats(guess)
         break
-      when 'c' || 'cheat'
+      elsif guess == 'c' || guess == 'cheat'
         puts "#{@answer}"
-      when 'q' || 'quit'
-        abort(Response.quit)
+      elsif guess.length > 4
+        puts "Sequence too long!"
+      elsif guess.length < 4
+        puts "Sequence too short!"
+      elsif guess == 'q' || guess == 'quit'
+        abort("Thanks for playing!")
       else
-        guess_feedback(guess.upcase) if (check_length(guess) == nil)
-        puts "You've taken #{@guess_count} guesses"
+        @guess_count += 1
+        guess_feedback(guess.upcase)
       end
     end
     Response.replay
   end
+
+  # def game_flow
+  #   Response.start
+  #   loop do
+  #     guess = user_input.downcase
+  #     # binding.pry
+  #     case guess
+  #     when @answer.downcase
+  #       @guess_count += 1
+  #       win_stats(guess)
+  #       break
+  #     when 'c' || 'cheat'
+  #       puts "#{@answer}"
+  #     when 'q' || 'quit'
+  #       abort(Response.quit)
+  #     else
+  #       guess_feedback(guess.upcase) if (check_length(guess) == nil)
+  #       puts "You've taken #{@guess_count} guesses"
+  #     end
+  #   end
+  #   Response.replay
+  # end
 
   def check_length(guess)
     @guess_count += 1
