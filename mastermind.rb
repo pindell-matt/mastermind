@@ -82,6 +82,7 @@ class Mastermind
     Response.start
     loop do
       guess = user_input.downcase
+      # binding.pry
       case guess
       when @answer.downcase
         @guess_count += 1
@@ -92,9 +93,8 @@ class Mastermind
       when 'q' || 'quit'
         abort(Response.quit)
       else
-        check_length(guess)
-        # needs to not run feedback if length returns value / recursion stragety
-        guess_feedback(guess.upcase)
+        guess_feedback(guess.upcase) if (check_length(guess) == nil)
+        puts "You've taken #{@guess_count} guesses"
       end
     end
     Response.replay
@@ -114,7 +114,6 @@ class Mastermind
     position = guess_position_check(guess)
     puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
     # correct plural
-    puts "You've taken #{@guess_count} guesses"
   end
 
   def guess_position_check(guess)
