@@ -20,10 +20,10 @@ class Mastermind
   end
 
   def game_start(input)
-    @answer = gen_answer
+    @sequence = gen_answer
     @start = Time.now
     @guess_count = 0
-    process_input(input)
+    parse_user_input(input)
   end
 
   def gen_answer
@@ -33,13 +33,7 @@ class Mastermind
     end.join
   end
 
-  # def answer_gen(num, colors)
-  #   num.times.map do |color|
-  #     colors.sample
-  #   end.join
-  # end
-
-  def process_input(input)
+  def parse_user_input(input)
     case input
     when 'p' || 'play'
       game_flow
@@ -52,28 +46,28 @@ class Mastermind
     end
   end
 
+  def gameplay
+    guess = user_input.downcase
+    case guess
+    when @sequence.downcase
+      @guess_count += 1
+      win_stats(guess)
+    when 'c' || 'cheat'
+      Response.cheat(@sequence)
+      gameplay
+    when 'q' || 'quit'
+      abort(Response.quit)
+    else
+      @guess_count += 1
+      guess_feedback(guess.upcase)
+      gameplay
+    end
+  end
+
   def game_flow
     Response.start
     @guess_count = 0
-    loop do
-      guess = user_input.downcase
-      if guess == 'q' || guess == 'quit'
-        abort(Response.quit)
-      elsif guess == @answer.downcase
-        @guess_count += 1
-        win_stats(guess)
-        break
-      elsif guess == 'c' || guess == 'cheat'
-        puts "#{@answer}"
-      elsif guess.length > 4
-        Response.too_long
-      elsif guess.length < 4
-        Response.too_short
-      else
-        @guess_count += 1
-        guess_feedback(guess.upcase)
-      end
-    end
+    gameplay
     Response.replay
   end
 
@@ -90,13 +84,12 @@ class Mastermind
     elements = guess_elements_check(guess)
     position = guess_position_check(guess)
     puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
-    # correct plural
   end
 
   def guess_position_check(guess)
     position = 0 # position is ivar?
     guess.chars.each_with_index do |guess, index|
-      if guess == @answer[index]
+      if guess == @sequence[index]
         position += 1
       end
     end
@@ -104,7 +97,7 @@ class Mastermind
   end
 
   def guess_elements_check(guess)
-    answer_chars = @answer.chars
+    answer_chars = @sequence.chars
     element = 0
     guess.chars.each do |char|
       if answer_chars.include?(char)

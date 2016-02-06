@@ -28,6 +28,10 @@ module Response
     print "Congratulations! You guessed the sequence '#{sequence}' "
   end
 
+  def self.cheat(sequence)
+    puts "Here's the sequence you cheating cheater: #{sequence}"
+  end
+
   def self.quit
     "Thanks for playing!"
   end
