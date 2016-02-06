@@ -1,19 +1,30 @@
+
+class String
+  def red;    "\033[31m#{self}\033[0m" end
+  def green;  "\033[32m#{self}\033[0m" end
+  def yellow; "\033[33m#{self}\033[0m" end
+  def blue;   "\033[34m#{self}\033[0m" end
+end
+
 module Response
 
+  MASTER = "M".red + "A".green + "S".yellow + "T".blue + "E".red + "R".green
+  MIND = "M".yellow + "I".blue + "N".red + "D".green
+  RED = "(r)ed".red
+  GREEN = "(g)reen".green
+  BLUE = "(b)lue".blue
+  YELLOW = "(y)ellow".yellow
+
   def welcome
-    puts "Welcome to MASTERMIND\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    puts "Welcome to #{MASTER + MIND}\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
   def instructions
-    puts "Try to guess the pattern, in both order and color, in the shortest number of turns as possible!"
+    puts "Try to guess the pattern, in both order and color, in the shortest number of turns as possible to become a #{MASTER}"
   end
 
   def start
-    puts "I have generated a beginner sequence with four elements made up of: (r)ed,\n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\nWhat's your guess?"
-  end
-
-  def re_prompt
-    puts "Please guess a combination of (r)ed, (g)reen, (b)lue, or (y)ellow.\nUse (q)uit at any time to end the game."
+    puts "I have generated a beginner sequence with four elements made up of: #{RED},\n#{GREEN}, #{BLUE}, and #{YELLOW}. Use (q)uit at any time to end the game.\nWhat's your guess?"
   end
 
   def replay
@@ -33,7 +44,7 @@ module Response
   end
 
   def quit
-    "Thanks for playing!"
+    "Quitting!? You must be out of your #{MIND}"
   end
 
   def too_long
