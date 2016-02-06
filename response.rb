@@ -10,7 +10,7 @@ module Response
 
   MASTER = "M".red + "A".green + "S".yellow + "T".blue + "E".red + "R".green
   MIND = "M".yellow + "I".blue + "N".red + "D".green
-  
+
   RED = "(r)ed".red
   GREEN = "(g)reen".green
   BLUE = "(b)lue".blue

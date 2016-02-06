@@ -35,6 +35,21 @@ class Mastermind
     end.join
   end
 
+  def colorize(guess)
+    guess.chars.map do |char|
+      case char
+      when 'R'
+        'R'.red
+      when 'G'
+        'G'.green
+      when 'B'
+        'B'.blue
+      when 'Y'
+        'Y'.yellow
+      end
+    end.join
+  end
+
   def parse_user_input(input)
     options = Hash.new(:bad_input)
     options['P']= :game_flow
@@ -55,11 +70,11 @@ class Mastermind
       @guess_count += 1
       if guess[0] == 'C'
         @guess_count -= 1
-        cheat(sequence)
+        cheat(colorize(sequence))
       elsif guess.length != 4
         invalid_length(guess)
       elsif guess == sequence
-        win_stats(guess)
+        win_stats(colorize(guess))
         break
       else
         guess_feedback(guess)
@@ -78,7 +93,7 @@ class Mastermind
   def guess_feedback(guess)
     elements = guess_elements_check(guess)
     position = guess_position_check(guess)
-    feedback(guess, elements, position)
+    feedback(colorize(guess), elements, position)
   end
 
   def guess_position_check(guess)
