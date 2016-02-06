@@ -24,7 +24,6 @@ class Mastermind
   def game_start(input)
     @sequence = gen_answer
     @start = Time.now
-    # @guess_count = 0
     parse_user_input(input)
   end
 
@@ -90,12 +89,12 @@ class Mastermind
   end
 
   def guess_elements_check(guess)
-    answer_chars = sequence.chars
+    guess_chars = guess.chars
     element = 0
-    guess.chars.each do |char|
-      if answer_chars.include?(char)
+    sequence.chars.map do |char|
+      if guess_chars.include?(char)
         element += 1
-        answer_chars.delete_at(answer_chars.index(char))
+        guess_chars.delete_at(guess_chars.index(char))
       end
     end
     element
