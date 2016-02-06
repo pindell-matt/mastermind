@@ -82,7 +82,7 @@ class Mastermind
 
   def guess_position_check(guess)
     position = 0
-    guess.chars.each_with_index do |guess, index| # map with index
+    guess.chars.each_with_index do |guess, index|
       position += 1 if guess == sequence[index]
     end
     position
