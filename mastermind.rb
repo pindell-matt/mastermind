@@ -36,14 +36,10 @@ class Mastermind
   end
 
   def parse_user_input(input)
-    case input[0]
-    when 'P'
-      game_flow
-    when 'I'
-      instructions
-    else
-      bad_input
-    end
+    options = Hash.new(:bad_input)
+    options['P']= :game_flow
+    options['I']= :instructions
+    self.send(options[input[0]])
   end
 
   def game_flow
