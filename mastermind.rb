@@ -16,7 +16,9 @@ class Mastermind
 
   def user_input
     print "> "
-    gets.chomp
+    input = gets.chomp.downcase
+    abort(quit) if input[0] == 'q'
+    input
   end
 
   def game_start(input)
