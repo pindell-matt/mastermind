@@ -10,14 +10,14 @@ class Mastermind
   def initialize
     welcome
     loop do
-      game_start(user_input.downcase)
+      game_start(user_input)
     end
   end
 
   def user_input
     print "> "
-    input = gets.chomp.downcase
-    abort(quit) if input[0] == 'q'
+    input = gets.chomp.upcase
+    abort(quit) if input[0] == 'Q'
     input
   end
 
@@ -36,29 +36,13 @@ class Mastermind
   end
 
   def parse_user_input(input)
-    case input
-    when 'p' || 'play'
+    case input[0]
+    when 'P'
       game_flow
-    when 'i' || 'instructions'
+    when 'I'
       instructions
     else
       bad_input
-    end
-  end
-
-  def gameplay
-    guess = user_input.downcase
-    case guess
-    when @sequence.downcase
-      @guess_count += 1
-      win_stats(guess)
-    when 'c' || 'cheat'
-      cheat(@sequence)
-      gameplay
-    else
-      @guess_count += 1
-      guess_feedback(guess.upcase)
-      gameplay
     end
   end
 
@@ -69,8 +53,25 @@ class Mastermind
     replay
   end
 
-  def check_length(guess)
-    @guess_count += 1
+  def gameplay
+    loop do
+      guess = user_input
+      @guess_count += 1
+      if guess[0] == 'C'
+        @guess_count -= 1
+        cheat(@sequence)
+      elsif guess.length != 4
+        invalid_length(guess)
+      elsif guess == @sequence
+        win_stats(guess)
+        break
+      else
+        guess_feedback(guess)
+      end
+    end
+  end
+
+  def invalid_length(guess)
     if guess.length > 4
       too_long
     elsif guess.length < 4
@@ -107,7 +108,7 @@ class Mastermind
   end
 
   def win_stats(guess)
-    win(guess.upcase)
+    win(guess)
     puts (total_guesses + ' ' + elapsed_time(@start, Time.now))
   end
 
