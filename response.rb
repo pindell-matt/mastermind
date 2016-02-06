@@ -44,4 +44,8 @@ module Response
     puts "Sequence too short!"
   end
 
+  def feedback(guess, elements, position)
+    puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
+  end
+
 end

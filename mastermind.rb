@@ -24,7 +24,7 @@ class Mastermind
   def game_start(input)
     @sequence = gen_answer
     @start = Time.now
-    @guess_count = 0
+    # @guess_count = 0
     parse_user_input(input)
   end
 
@@ -78,11 +78,11 @@ class Mastermind
   def guess_feedback(guess)
     elements = guess_elements_check(guess)
     position = guess_position_check(guess)
-    puts "'#{guess}' has #{elements} of the correct elements with #{position} in the correct positions"
+    feedback(guess, elements, position)
   end
 
   def guess_position_check(guess)
-    position = 0 # position is ivar?
+    position = 0
     guess.chars.each_with_index do |guess, index| # map with index
       position += 1 if guess == sequence[index]
     end
