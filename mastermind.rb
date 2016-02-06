@@ -41,8 +41,6 @@ class Mastermind
       game_flow
     when 'i' || 'instructions'
       instructions
-    when 'q' || 'quit'
-      abort(quit)
     else
       bad_input
     end
@@ -57,8 +55,6 @@ class Mastermind
     when 'c' || 'cheat'
       cheat(@sequence)
       gameplay
-    when 'q' || 'quit'
-      abort(quit)
     else
       @guess_count += 1
       guess_feedback(guess.upcase)
