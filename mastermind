@@ -46,6 +46,8 @@ class Mastermind
         'B'.blue
       when 'Y'
         'Y'.yellow
+      else
+        char
       end
     end.join
   end
