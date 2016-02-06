@@ -83,16 +83,14 @@ class Mastermind
 
   def guess_position_check(guess)
     position = 0 # position is ivar?
-    guess.chars.each_with_index do |guess, index|
-      if guess == @sequence[index]
-        position += 1
-      end
+    guess.chars.each_with_index do |guess, index| # map with index
+      position += 1 if guess == sequence[index]
     end
     position
   end
 
   def guess_elements_check(guess)
-    answer_chars = @sequence.chars
+    answer_chars = sequence.chars
     element = 0
     guess.chars.each do |char|
       if answer_chars.include?(char)
