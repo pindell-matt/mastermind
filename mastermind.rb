@@ -5,7 +5,7 @@ require_relative 'response'
 class Mastermind
   include Response
 
-  attr_reader :start_time
+  attr_reader :start_time, :sequence
 
   def initialize
     welcome
@@ -43,8 +43,8 @@ class Mastermind
   end
 
   def game_flow
-    start
     @guess_count = 0
+    start
     gameplay
     replay
   end
@@ -55,10 +55,10 @@ class Mastermind
       @guess_count += 1
       if guess[0] == 'C'
         @guess_count -= 1
-        cheat(@sequence)
+        cheat(sequence)
       elsif guess.length != 4
         invalid_length(guess)
-      elsif guess == @sequence
+      elsif guess == sequence
         win_stats(guess)
         break
       else
