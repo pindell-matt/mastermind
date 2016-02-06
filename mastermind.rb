@@ -8,7 +8,7 @@ class Mastermind
   attr_reader :start_time
 
   def initialize
-    Response.welcome
+    welcome
     loop do
       game_start(user_input.downcase)
     end
@@ -38,11 +38,11 @@ class Mastermind
     when 'p' || 'play'
       game_flow
     when 'i' || 'instructions'
-      Response.instructions
+      instructions
     when 'q' || 'quit'
-      abort(Response.quit)
+      abort(quit)
     else
-      Response.bad_input
+      bad_input
     end
   end
 
@@ -53,10 +53,10 @@ class Mastermind
       @guess_count += 1
       win_stats(guess)
     when 'c' || 'cheat'
-      Response.cheat(@sequence)
+      cheat(@sequence)
       gameplay
     when 'q' || 'quit'
-      abort(Response.quit)
+      abort(quit)
     else
       @guess_count += 1
       guess_feedback(guess.upcase)
@@ -65,18 +65,18 @@ class Mastermind
   end
 
   def game_flow
-    Response.start
+    start
     @guess_count = 0
     gameplay
-    Response.replay
+    replay
   end
 
   def check_length(guess)
     @guess_count += 1
     if guess.length > 4
-      Response.too_long
+      too_long
     elsif guess.length < 4
-      Response.too_short
+      too_short
     end
   end
 
@@ -109,7 +109,7 @@ class Mastermind
   end
 
   def win_stats(guess)
-    Response.win(guess.upcase)
+    win(guess.upcase)
     puts (total_guesses + ' ' + elapsed_time(@start, Time.now))
   end
 
