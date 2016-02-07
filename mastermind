@@ -45,7 +45,11 @@ class Mastermind
 
   def colorize(submitted)
     submitted.chars.map do |char|
-      COLORS.fetch(char)
+      if COLORS.keys.include?(char)
+        COLORS.fetch(char)
+      else
+        char
+      end
     end.join
   end
 
