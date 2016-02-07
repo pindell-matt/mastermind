@@ -26,4 +26,19 @@ module Evaluation
     element
   end
 
+  def win_stats(guess)
+    win(guess)
+    puts (total_guesses + ' ' + elapsed_time(@start_time, Time.now))
+  end
+
+  def total_guesses
+    plural = @guess_count > 1 ? "guesses" : "guess"
+    "in #{@guess_count} #{plural} over"
+  end
+
+  def elapsed_time(start, finish)
+    raw_time = (finish - start).divmod(60)
+    "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
+  end
+
 end

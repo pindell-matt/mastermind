@@ -2,14 +2,13 @@
 require 'time'
 require 'pry'
 require_relative 'response'
-require_relative 'feedback'
+require_relative 'evaluation'
 
 class Mastermind
   include Response
-  include Feedback
+  include Evaluation
 
-  attr_reader :start_time, :sequence
-  attr_accessor :guess
+  attr_reader :start_time, :sequence, :guess_count
 
   def initialize
     welcome
@@ -26,12 +25,12 @@ class Mastermind
   end
 
   def game_start(input)
-    @sequence = gen_answer
-    @start = Time.now
+    @sequence = sequence_gen
+    @start_time = Time.now
     parse_user_input(input)
   end
 
-  def gen_answer
+  def sequence_gen
     colors = %w{R G B Y}
     4.times.map do |color|
       colors.sample
@@ -39,6 +38,7 @@ class Mastermind
   end
 
   def colorize(submitted)
+    # hash "dictionary"
     submitted.chars.map do |char|
       case char
       when 'R'
@@ -95,20 +95,20 @@ class Mastermind
     end
   end
 
-  def win_stats(guess)
-    win(guess)
-    puts (total_guesses + ' ' + elapsed_time(@start, Time.now))
-  end
-
-  def total_guesses
-    plural = @guess_count > 1 ? "guesses" : "guess"
-    "in #{@guess_count} #{plural} over"
-  end
-
-  def elapsed_time(start, finish)
-    raw_time = (finish - start).divmod(60)
-    "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
-  end
+  # def win_stats(guess)
+  #   win(guess)
+  #   puts (total_guesses + ' ' + elapsed_time(@start, Time.now))
+  # end
+  #
+  # def total_guesses
+  #   plural = @guess_count > 1 ? "guesses" : "guess"
+  #   "in #{@guess_count} #{plural} over"
+  # end
+  #
+  # def elapsed_time(start, finish)
+  #   raw_time = (finish - start).divmod(60)
+  #   "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
+  # end
 
 end
 
