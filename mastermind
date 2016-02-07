@@ -10,6 +10,12 @@ class Mastermind
 
   attr_reader :start_time, :sequence, :guess_count
 
+  COLORS = {'R' => 'R'.red,
+            'G' => 'G'.green,
+            'B' => 'B'.blue,
+            'Y' => 'Y'.yellow
+           }
+
   def initialize
     welcome
     loop do
@@ -38,20 +44,8 @@ class Mastermind
   end
 
   def colorize(submitted)
-    # hash "dictionary"
     submitted.chars.map do |char|
-      case char
-      when 'R'
-        'R'.red
-      when 'G'
-        'G'.green
-      when 'B'
-        'B'.blue
-      when 'Y'
-        'Y'.yellow
-      else
-        char
-      end
+      COLORS.fetch(char)
     end.join
   end
 
@@ -94,21 +88,6 @@ class Mastermind
       too_short
     end
   end
-
-  # def win_stats(guess)
-  #   win(guess)
-  #   puts (total_guesses + ' ' + elapsed_time(@start, Time.now))
-  # end
-  #
-  # def total_guesses
-  #   plural = @guess_count > 1 ? "guesses" : "guess"
-  #   "in #{@guess_count} #{plural} over"
-  # end
-  #
-  # def elapsed_time(start, finish)
-  #   raw_time = (finish - start).divmod(60)
-  #   "#{raw_time.first} minutes, #{(raw_time.last).round} seconds."
-  # end
 
 end
 
