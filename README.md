@@ -1,4 +1,4 @@
-For this project, I used ruby to build and implementation of the game [Mastermind](https://en.wikipedia.org/wiki/Mastermind_%28board_game%29)
+For this project, I used ruby to build an implementation of the game [Mastermind](https://en.wikipedia.org/wiki/Mastermind_%28board_game%29)
 
 ### Learning Goals / Areas of Focus
 
