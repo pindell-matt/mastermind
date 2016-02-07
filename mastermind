@@ -7,6 +7,7 @@ class Mastermind
   include Response
 
   attr_reader :start_time, :sequence
+  # attr_accessor :guess
 
   def initialize
     welcome
@@ -35,8 +36,8 @@ class Mastermind
     end.join
   end
 
-  def colorize(guess)
-    guess.chars.map do |char|
+  def colorize(submitted)
+    submitted.chars.map do |char|
       case char
       when 'R'
         'R'.red
