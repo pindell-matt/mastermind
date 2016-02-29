@@ -1,3 +1,5 @@
+# Mastermind
+
 For this project, I used ruby to build an implementation of the game [Mastermind](https://en.wikipedia.org/wiki/Mastermind_%28board_game%29)
 
 ### Learning Goals / Areas of Focus
@@ -31,12 +33,13 @@ I have generated a beginner sequence with four elements made up of: (r)ed,
 What's your guess?
 ```
 
-They can then enter a guess in the form `rrgb`
+They can then enter the initials of each color in their guess - either in upper case or lower case - like so, `rrgb`
+At this point, the player can submit their guess, or:
 
 * `'q'` or `'quit'` will still provide the option to exit the game
 * `'c'` or `'cheat'` will reveal the final answer
-* Players are prompted to try again if their answer is too long or too short
-* Feedback is also given for partially correct answers, as seen in the example below:
+
+Players are prompted to try again if their answer is too long or too short (and is neither `'q'` / `'quit'` or `'c'` / `'cheat'`) and feedback is given for partially correct answers, as seen in the example below:
 
 ```
 'RRGB' has 3 of the correct elements with 2 in the correct positions
@@ -55,3 +58,11 @@ Do you want to (p)lay again or (q)uit?
 ```
 
 If the player enters `'p'` or `'play'` then the game will start over. Otherwise, `'q'` or `'quit'` can be used to end the game
+
+## Contributing
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
